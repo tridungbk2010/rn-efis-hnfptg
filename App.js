@@ -1,12 +1,20 @@
 import React from 'react';
+import 'rxjs';
 // import {StyleSheet, Text, View} from 'react-native';
-import Welcome from './screens/Welcome';
-import Comment from './screens/Comment';
-import BookingTour from './screens/BookingTour';
-import {TabNavigator} from 'react-navigation';
+import Welcome from './src/screens/Welcome';
+import Comment from './src/screens/Comment';
+import BookingTour from './src/screens/BookingTour';
+import {TabNavigator, StackNavigator} from 'react-navigation';
 import {Font, AppLoading} from 'expo';
-import Video from "./screens/Video";
-import Schedule from "./screens/Schedule";
+import Video from "./src/screens/Video";
+import Schedule from "./src/screens/Schedule";
+import Auth from "./src/screens/Auth";
+import TourDetail from "./src/screens/TourDetail";
+import {Provider} from 'react-redux';
+import configureStore from './src/store';
+const { persistor, store } = configureStore();
+import {PersistGate} from 'redux-persist/lib/integration/react';
+
 
 export default class App extends React.Component {
     state = {
@@ -29,10 +37,20 @@ export default class App extends React.Component {
     render() {
         const MainNavigator = TabNavigator({
                 welcome: {screen: Welcome},
+                auth: {screen: Auth},
                 main: {
                     screen: TabNavigator({
-                            bookingTour: {screen: BookingTour},
-                            schedule: {screen: Schedule},
+                            bookingTour: {
+                                screen: StackNavigator({
+                                    bookingTour:{screen:BookingTour},
+                                    tour:{screen: TourDetail}
+                                })
+                            },
+                            schedule: {screen: StackNavigator({
+                                schedule:{screen:Schedule},
+                                tour:{screen: TourDetail}
+                                })
+                            },
                             video: {screen: Video},
                             comment: {screen: Comment}
                         },
@@ -56,7 +74,14 @@ export default class App extends React.Component {
             });
 
         return this.state.fontLoaded ? (
-            <MainNavigator/>
+            <Provider store={store}>
+                <PersistGate
+                    persistor={persistor}
+                    loading={<AppLoading/>}
+                >
+                    <MainNavigator/>
+                </PersistGate>
+            </Provider>
         ) : (<AppLoading/>)
     }
 }

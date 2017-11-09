@@ -19,7 +19,17 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-21.0.2.tar.gz",
     "react-native-elements": "^0.17.0",
     "react-native-scripts": "^1.5.0",
+    "react-native-ui-kitten": "^2.0.1",
     "react-native-vector-icons": "^4.4.1",
-    "react-navigation": "^1.0.0-beta.13"
+    "react-navigation": "^1.0.0-beta.13",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-observable": "^0.16.0",
+    "redux-persist": "^5.1.0",
+    "redux-thunk": "^2.2.0",
+    "rxjs": "^5.5.2"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.2"
   }
 }

@@ -7,9 +7,9 @@ import Intro from './Intro';
 import PropTypes from 'prop-types';
 import Indicator from './Indicator';
 
-const intro0 = require('../assets/images/login_bg.png');
-const intro1 = require('../assets/images/cover-hnftpg.png');
-const intro2 = require('../assets/images/efis.png');
+const intro0 = require('../../assets/images/login_bg.png');
+const intro1 = require('../../assets/images/cover-hnftpg.png');
+const intro2 = require('../../assets/images/efis.png');
 
 const DATA = [
     {

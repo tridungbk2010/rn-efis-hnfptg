@@ -1,15 +1,29 @@
 import React, {Component} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, View, Platform} from 'react-native';
 import {Icon, Button, Header, SearchBar} from 'react-native-elements';
 import Tour from '../components/Tour';
 
 class BookingTour extends Component {
-    static navigationOptions = {
+    state = {
+        tourIndex:null
+    };
+    static navigationOptions = ({navigation}) => ({
         tabBarLabel: "Tours",
+        headerRight: <Button title={"Tour"}
+                             backgroundColor="rgba(0,0,0,0)"
+                             color="rgba(0,122,255,1)"
+                             onPress={() => navigation.navigate('tour')}
+        />,
+        headerStyle: {marginTop: Platform.OS === "android" ? 24 : 0},
         tabBarIcon: ({tintColor}) => (<Icon name="suitcase"
                                             size={30}
                                             type={'font-awesome'}
                                             color={tintColor}/>)
+    });
+
+    navigateToDetail = id => {
+        this.setState({tourIndex:id});
+        // this.props.navigation.navigate("tour",{id})
     };
 
     render() {
@@ -19,6 +33,8 @@ class BookingTour extends Component {
                     style={styles.mainView}>
                     {
                         PLACES.map(tour => <Tour key={tour.id}
+                                                 active={this.state.tourIndex === tour.id}
+                                                 onPress={this.navigateToDetail.bind(this, tour.id)}
                                                  duration={tour.duration}
                                                  desc={tour.desc}
                                                  type={tour.type}
@@ -37,8 +53,8 @@ class BookingTour extends Component {
 
 const styles = {
     mainView: {
-        paddingHorizontal: 15,
-        marginTop:30
+        // paddingHorizontal: 15,
+        // marginTop:30
         // flex: 1,
         // justifyContent: 'space-between',
         // paddingHorizontal: 10,
@@ -75,7 +91,7 @@ const PLACES = [
         type: 'City walking',
         desc: 'This is a sample name of service that is very very long',
         duration: '2h',
-        url: require('../assets/images/turtle-tower.jpeg')
+        url: require('../../assets/images/turtle-tower.jpeg')
     },
     {
         id: 1,
@@ -84,7 +100,7 @@ const PLACES = [
         desc: 'This is a sample name of service that is very very long',
         type: 'Long trip',
         duration: '2 days',
-        url: require('../assets/images/sapa.jpg')
+        url: require('../../assets/images/sapa.jpg')
     },
     {
         id: 2,
@@ -93,7 +109,7 @@ const PLACES = [
         desc: 'This is a sample name of service that is very very long',
         type: 'City walking',
         duration: '2h',
-        url: require('../assets/images/street_food.jpeg')
+        url: require('../../assets/images/street_food.jpeg')
     },
     {
         id: 3,
@@ -102,7 +118,7 @@ const PLACES = [
         fee: 210,
         type: 'Long trip',
         duration: '3 days',
-        url: require('../assets/images/halongbay.jpg')
+        url: require('../../assets/images/halongbay.jpg')
     },
     {
         id: 4,
@@ -110,7 +126,7 @@ const PLACES = [
         fee: 0,
         type: 'City walking',
         duration: '2h',
-        url: require('../assets/images/oldquarter.jpg')
+        url: require('../../assets/images/oldquarter.jpg')
     },
     {
         id: 5,
@@ -118,7 +134,7 @@ const PLACES = [
         fee: 0,
         type: 'City walking',
         duration: '3h',
-        url: require('../assets/images/hcm.jpeg')
+        url: require('../../assets/images/hcm.jpeg')
     },
     {
         id: 6,
@@ -126,7 +142,7 @@ const PLACES = [
         fee: 0,
         type: 'City walking',
         duration: '3h',
-        url: require('../assets/images/turtle-tower.jpeg')
+        url: require('../../assets/images/turtle-tower.jpeg')
     },
     {
         id: 7,
@@ -134,7 +150,7 @@ const PLACES = [
         fee: 99,
         type: 'Long trip',
         duration: '1 day',
-        url: require('../assets/images/battrang.jpg')
+        url: require('../../assets/images/battrang.jpg')
     },
     {
         id: 8,
@@ -142,7 +158,7 @@ const PLACES = [
         fee: 78,
         type: 'Long trip',
         duration: '0.5 day',
-        url: require('../assets/images/duonglam.jpg')
+        url: require('../../assets/images/duonglam.jpg')
     },
     {
         id: 9,
@@ -150,7 +166,7 @@ const PLACES = [
         fee: 0,
         type: 'City walking',
         duration: '2h',
-        url: require('../assets/images/turtle-tower.jpeg')
+        url: require('../../assets/images/turtle-tower.jpeg')
     },
     {
         id: 10,
@@ -158,6 +174,6 @@ const PLACES = [
         fee: 15,
         type: 'City walking',
         duration: '0.5 day',
-        url: require('../assets/images/halongbay.jpg')
+        url: require('../../assets/images/halongbay.jpg')
     }
 ];

@@ -9,13 +9,12 @@ class Intro extends Component {
         return (
             <View style={styles.intro}>
                 <Text style={styles.text}>{title}</Text>
-                {isLast && <Button
-                    borderRadius={5}
-                    backgroundColor={"#8BC34A"}
-                    containerViewStyle={{
-                        marginTop: 25
-                    }}
-                    title={"Onwards"} onPress={onComplete}
+                {isLast && <Button icon={{name: 'facebook', type: 'font-awesome'}}
+                                   borderRadius = {5}
+                                   buttonStyle={{marginTop:15}}
+                                   backgroundColor={'#4267b2'}
+                                   title={"Login with Facebook"}
+                                   onPress={onComplete}
                 />
                 }
             </View>
@@ -25,7 +24,10 @@ class Intro extends Component {
 
 const styles = {
     intro: {
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        flex:1,
+        justifyContent:'flex-end',
+        marginBottom:90
     },
     text: {
         color: '#fff',
